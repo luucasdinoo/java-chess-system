@@ -8,11 +8,8 @@ import chess.Color;
 
 public class Knight extends ChessPiece {
 
-    //private ChessMatch chessMatch;
-
     public Knight(Board board, Color color) {
         super(board, color);
-        //this.chessMatch = chessMatch;
     }
     @Override
     public String toString(){
@@ -22,11 +19,6 @@ public class Knight extends ChessPiece {
     private boolean canMove(Position position){
         ChessPiece p = (ChessPiece) getBoard().piece(position);
         return p == null || p.getColor() != getColor();
-    }
-
-    private boolean testRookCastling(Position position){
-        ChessPiece p = (ChessPiece)getBoard().piece(position);
-        return  p != null && p instanceof  Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
     }
     @Override
     public boolean[][] possibleMovies() {
@@ -66,18 +58,7 @@ public class Knight extends ChessPiece {
         if (getBoard().positionExists(p) && canMove(p)){
             mat[p.getRow()][p.getColumn()] = true;
         }
-        //#Movimento especial castling
-       /* if (getMoveCount() == 0 && !chessMatch.getCheck()){
-            //#Movimento especial castling do lado do rei
-            Position postT1 = new Position(position.getRow(), position.getColumn() + 3);
-            if (testRookCastling(postT1)){
-                Position p1 = new Position(position.getRow(), position.getColumn() + 1);
-                Position p2 = new Position(position.getRow(), position.getColumn() + 2);
-                if (getBoard().piece(p1) == null && getBoard().piece(p2) == null){
-                    mat[position.getRow()][position.getColumn() + 2] = true;
-                }
-            }
-        } */
+
         return mat;
     }
 }
